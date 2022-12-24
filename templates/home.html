@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<style>
+@media only screen and (max-width: 550px) {
+
+    .btn-lg{
+      font-size: 14px;
+      font-weight: 500;
+      width: 99px;
+      height: 60px;
+    }
+}
+
+ 
+
+  body{
+    background: #e9e8e8;
+  }
+  a:hover{
+    color:white;
+  }
+h1{
+  text-align: center;
+  font-size: 50px;
+  margin-top:50px;
+  font-weight: 600;
+}
+p{
+  text-align: center;
+  margin-top:15px;
+  margin-bottom:35px;
+  font-weight: 350;
+}
+ 
+#start{
+
+background: linear-gradient(157deg, rgba(51,158,83,1) 0%, rgba(24,140,65,1) 56%) !important;
+  transition: 0.3s !important;
+}
+#start:hover{
+background: linear-gradient(157deg, rgba(51,162,85,1) 0%, rgba(25,154,71,1) 56%) !important;
+}
+button{
+  transition: 0.3s !important;
+}
+
+.music-card{
+  box-sizing: border-box;
+  width: 360px;
+  height: 170px;
+  border-radius: 15px;
+  background: #242424;
+  padding: 25px 20px;
+  transition: 0.3s;
+  box-shadow: 0px 5px 15px 2px rgba(89, 89, 104, 1);
+}
+
+.music-card > img {
+  width: 120px;
+  height: 120px;
+  border-radius: 10px;
+  float:left;
+  margin-right:10px;
+}
+
+.text > h4 {
+  font-size: 18px;
+  margin-top:10px;
+  color: white;
+  
+}
+.text > p {
+  height: 15px;
+  margin-top: 3px;
+  font-size: 14px;
+  color: white;
+  display: inline-block;
+}
+
+.music-card >p {
+  font-size: 14px;
+  color: white;
+  opacity: 0.6; 
+  display: inline-block;
+}
+.music-card:hover {
+  opacity: 0.93;
+  cursor: pointer;
+  box-shadow: 0px 5px 18px 4px rgba(89, 89, 104, 1)
+}
+
+</style>
+{% for message in get_flashed_messages() %}
+	
+	<div class="alert alert-success alert-dismissible fade show" role="alert">
+	  {{ message }}
+	  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+	</div>
+{%endfor%}
+<div>
+<h1>SpotiHelper</h1>
+<p>Discover your favourite songs and aritsts. Search the songs you've listened to. Create playlists based on your musical taste.</p>
+<center>
+<a href="{{url_for('favourite_tracks', time_range='short_term')}}"><button id="start"class="btn btn-lg btn-success">My favourites</button></a>
+<a href="{{url_for('playlists')}}"><button id="start" style="margin-left:30px;" class="btn btn-lg btn-success">Playlists</button></a>
+<a href="{{url_for('recently_played')}}"><button id="start" style="margin-left:30px;" class="btn btn-lg btn-success">Recently Played</button></a>
+</center>
+</div>
+
+{%if currently_playing%}
+<div style="margin-top:200px;">
+<h3><i class='fas fa-headphones-alt'></i>  Currently Playing</h3>
+<div style="margin-top:20px;" class="music-card">       
+  <img src="{{currently_playing['image']}}">
+  <div class="text">
+  <h4>{{currently_playing['name']}}</h4>
+  <p>{{currently_playing['artist']}}</p>
+</div>
+</div>
+</div>
+{%endif%}
+
+
+{% endblock %}

@@ -1,0 +1,127 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+    body{
+    background: #e9e8e8;
+  }
+    a:hover{
+        color:#208454;
+    }
+    .wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+}
+
+.card-container {
+  display: grid;
+ grid-template-columns: repeat(3, 400px);
+  grid-gap: 25px 10px;
+  width: 90%;
+  align-self: center;
+  margin-bottom:15px;
+  margin-top:25px;
+}
+
+
+.music-card{
+  box-sizing: border-box;
+  width: 340px;
+  height: 150px;
+  border-radius: 15px;
+  background: #242424;
+  padding: 25px 20px;
+  transition: 0.3s;
+  box-shadow: 0px 5px 15px 2px rgba(89, 89, 104, 1);
+}
+
+.music-card > img {
+  width: 100px;
+  height: 100px;
+  border-radius: 10px;
+  float:left;
+  margin-right:10px;
+}
+
+.text > h4 {
+  font-size: 16px;
+  margin-top:10px;
+  color: white;
+  width:310px;
+  
+}
+.text > p {
+  width: 330px;
+  height: 15px;
+  margin-top: 3px;
+  font-size: 12px;
+  color: white;
+}
+
+.music-card:hover {
+  opacity: 0.93;
+  cursor: pointer;
+  box-shadow: 0px 5px 18px 4px rgba(89, 89, 104, 1)
+}
+.music-card > p{
+    color:white;
+    float: left;
+    margin-right: 10px;
+    font-weight: 500;
+}
+#start{
+
+background: linear-gradient(157deg, rgba(51,158,83,1) 0%, rgba(24,140,65,1) 56%) !important;
+  transition: 0.3s !important;
+}
+#start:hover{
+background: linear-gradient(157deg, rgba(51,162,85,1) 0%, rgba(25,154,71,1) 56%) !important;
+}
+h1{
+  font-size: 50px;
+   display: inline-block;
+}
+@media only screen and (max-width: 550px) {
+  .card-container {
+  display: grid;
+ grid-template-columns: repeat(1, 300px);
+  grid-gap: 25px 20px;
+  width: 90%;
+  align-self: center;
+  margin-right:20px;
+  margin-bottom:15px;
+  margin-top:25px;
+}
+h1{
+  font-size: 40px;
+}
+}
+</style>
+{% for message in get_flashed_messages() %}
+	
+	<div class="alert alert-success alert-dismissible fade show" role="alert">
+	  {{ message }}
+	  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+	</div>
+{%endfor%}
+
+<h1>{{playlist_name}}</h1>
+<a href="{{url_for('playlists')}}"><button style="display: inline-block; float:right; margin-top: 10px; "class="btn btn-success" id="start">Playlists</button></a>
+<hr>
+<div class="wrapper">
+    <div class="card-container">
+      {%for track in tracks%}
+      <div class="music-card">       
+        <img src="{{track['image']}}">
+        <div class="text" style="width:335px;">
+        <h4>{{track['name']}}</h4>
+        <p>{{track['artist']}}</p>
+      </div>
+    </div>
+    {%endfor%}
+  </div>
+  </div>
+
+{% endblock %}

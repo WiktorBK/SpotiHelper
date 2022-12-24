@@ -1,4 +1,4 @@
 venv/
 migrations/
-templates/
 __pycache__/
+secrets_spoti.py

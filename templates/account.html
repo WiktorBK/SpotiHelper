@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+<style>
+      body{
+    background: #e9e8e8;
+  }
+  p{
+  margin-top:15px;
+  margin-bottom:65px;
+  font-weight: 350;
+  opacity: 0.7;
+}
+h1{
+    font-size:50px;
+    margin-top:20px;
+}
+
+@media only screen and (max-width: 550px) {
+#card{
+    width: 200px;
+}
+h1{
+    font-size:40px;
+}
+}
+</style>
+
+<center>
+    <svg xmlns="http://www.w3.org/2000/svg" width="78" height="78" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5.52 19c.64-2.2 1.84-3 3.22-3h6.52c1.38 0 2.58.8 3.22 3"/><circle cx="12" cy="10" r="3"/><circle cx="12" cy="12" r="10"/></svg>
+<h1>Hello, {{name}}!</h1>
+<p>id: {{user_id}}</p>
+</center>
+
+<div class="row">
+<div id="card"style="width:400px;margin-right: 50px;  margin-top:20px; margin-bottom:20px"class="card border border-primary shadow-0 ">
+    <div style="font-size: 20px;" class="card-header">Deny Access <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></div>
+    <div class="card-body">
+      <p class="card-text">
+        Deny SpotiHelper's access to Spotify. Without your permission, app won't work properly. You will be logged out automatically.
+      </p>
+  
+      <a href="{{url_for('access_decline')}}"><button type="button" class="btn btn-primary">Deny Access</button></a>
+    </div>
+  </div>
+
+  <div id="card" style="width:400px;  margin-top:20px; margin-right: 50px; margin-bottom:20px"class="card border border-primary shadow-0 ">
+    <div style="font-size: 20px;"class="card-header">Spotify Account <i class="fab fa-spotify"> </i></div>
+    <div class="card-body">
+      <p class="card-text">
+        Remove SpotiHelper's access to your account directly from Spotify's site.
+      </p>
+      <br/>
+  
+      <a href="https://www.spotify.com/pl/account/overview/" target="_blank"><button type="button" class="btn btn-primary">Continue to Spotify</i></button></a>
+    </div>
+  </div>
+  <div id="card" style="width:400px; margin-top:20px; margin-bottom:20px"class="card border border-primary shadow-0 ">
+    <div style="font-size: 20px;" class="card-header">Delete Account <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg></div>
+    <div class="card-body">
+      <p class="card-text">
+        Delete your account permanently. This action will remove any spotify permissions you've granted and it's irreversible.
+      </p>
+  
+      <a href="{{url_for('delete_account')}}"><button type="button" class="btn btn-danger">Delete</button></a>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}
