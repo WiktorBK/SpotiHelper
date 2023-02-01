@@ -12,7 +12,7 @@ from spotifyClient import SpotifyClient
 from refresh import Refresh
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:postgres@localhost/spotihelper'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://user:password@localhost/spotihelper'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['PROPAGATE_EXCEPTIONS'] = True
 app.config['SECRET_KEY'] = "top_secret"
