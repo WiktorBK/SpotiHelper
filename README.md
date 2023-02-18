@@ -8,7 +8,7 @@ favourite tracks and artists. User can also create new playlist based on recent
 musical taste. 
 
 Spotify won't send any data from non-premium account which means you must be premium 
-spotify user in order to use use SpotiHelper.
+spotify user in order to use SpotiHelper.
 
 SpotiHelper is running on a server created with Gunicorn and NGINX.
 
