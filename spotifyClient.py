@@ -14,17 +14,13 @@ class SpotifyClient():
         self.token = current_user.auth_token
 
     def recently_played(self):
-        
         tracks = []
         url = f"https://api.spotify.com/v1/me/player/recently-played?limit=20"
-
         response = requests.get(
             url,
             headers={
                 "Content-Type": "application/json",
-                "Authorization": f"Bearer {self.token}"
-            }
-        )
+                "Authorization": f"Bearer {self.token}"})
         response_json = response.json()
         for track in response_json['items']:
             seconds, track['track']['duration_ms'] = divmod(track['track']['duration_ms'], 1000)
@@ -35,21 +31,18 @@ class SpotifyClient():
                 "artists": track['track']['artists'][0]['name'],
                 "duration": duration,
                 "image": track['track']['album']['images'][1]['url']
-                }
-                )
+                })
 
         return tracks
         
-    def currently_playing(self):
-        
+    def currently_playing(self):        
         url = f"https://api.spotify.com/v1/me/player/currently-playing"
         response = requests.get(
             url,
             headers={
                 "Content-Type": "application/json",
                 "Authorization": f"Bearer {self.token}"
-            }
-        )
+            })
         try:
             track={}
             response_json = response.json()
@@ -73,8 +66,7 @@ class SpotifyClient():
             headers={
                 "Content-Type": "application/json",
                 "Authorization": f"Bearer {self.token}"
-            }
-        )
+            })
         response_json = response.json()
         position=0
         for track in response_json['items']:
@@ -84,12 +76,10 @@ class SpotifyClient():
                     "name": track['name'],
                 "artists": track['artists'][0]['name'],
                 "image": track['album']['images'][1]['url']
-                }
-                )
+                })
         return tracks
 
     def favourite_artists(self, time_range):
-        
         artists = []
         url = f"https://api.spotify.com/v1/me/top/artists?limit=30&time_range={time_range}"
         response = requests.get(
@@ -97,8 +87,7 @@ class SpotifyClient():
             headers={
                 "Content-Type": "application/json",
                 "Authorization": f"Bearer {self.token}"
-            }
-        )
+            })
         response_json = response.json()
         position=0
         for artist in response_json['items']:
@@ -109,12 +98,10 @@ class SpotifyClient():
                 "image": artist['images'][1]['url'],
                 "followers": artist['followers']['total'],
                 "genres": artist['genres']
-                }
-                )
+                })
         return artists
     
     def create_and_populate_playlist(self, playlist_name, uris):
-        
         user_id = self.get_user_id()
         url = f"https://api.spotify.com/v1/users/{user_id}/playlists"
 
@@ -128,8 +115,7 @@ class SpotifyClient():
                 "Content-Type": "application\json",
                 "Authorization": f"Bearer {self.token}"
             },
-            data=request_body
-        )
+            data=request_body)
 
         url = f"https://api.spotify.com/v1/playlists/{response.json()['id']}/tracks"
         request_body2 = json.dumps({"uris": uris,"position": 0})
@@ -139,43 +125,36 @@ class SpotifyClient():
             "Content-Type": "application\json",
             "Authorization": f"Bearer {self.token}"
             },
-            data=request_body2
-        )
+            data=request_body2)
 
     def get_user_id(self):
-       
         url = "https://api.spotify.com/v1/me"
         response = requests.get(
             url,
             headers={
                 "Content-Type": "application\json",
                 "Authorization": f"Bearer {self.token}"
-            }
-        )
+            })
         return response.json()['id']
 
 
     def get_name(self):
-        
         url = "https://api.spotify.com/v1/me"
         response = requests.get(
             url,
             headers={
                 "Content-Type": "application\json",
                 "Authorization": f"Bearer {self.token}"
-            }
-        )
+            })
         return response.json()['display_name']
     def get_playlists(self):
-        
         url = "https://api.spotify.com/v1/me/playlists?limit=50"
         response = requests.get(
             url,
             headers={
                 "Content-Type": "application\json",
                 "Authorization": f"Bearer {self.token}"
-            }
-        )
+            })
         playlists = []
         for playlist in response.json()['items']:
             if len(playlist['images']) == 0:
@@ -189,9 +168,7 @@ class SpotifyClient():
                     "owner": playlist['owner']["display_name"],
                     "tracks": playlist['tracks']['total'],
                     "image": image
-                    
-                }
-            )
+                 })
 
         return playlists
 
@@ -202,7 +179,6 @@ class SpotifyClient():
             for genre in artist['genres']:
                 genres.append(genre)
                 break
-
         return set(genres)
 
     def generate_tracks(self, limit):
@@ -226,9 +202,7 @@ class SpotifyClient():
                 url,
                 headers={
                     "Content-Type": "application\json",
-                    "Authorization": f"Bearer {self.token}"
-                }
-            )
+                    "Authorization": f"Bearer {self.token}"})
         
             for track in response.json()['tracks']['items']:
                 tracks.append(
@@ -238,14 +212,12 @@ class SpotifyClient():
                     "url": track['href'],
                     "uri": track['uri'],
                     "genre": genres[i]
-                    }
-                )
+                    })
             i+=1
             
         return tracks
 
     def call_refresh(self):
-
         refresh_caller = Refresh()
         current_user.auth_token = refresh_caller.refresh()
         db.session.commit()
