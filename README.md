@@ -1,4 +1,4 @@
-# SpotiHelper
+# What is SpotiHelper?
 
 [www.spotihelper.com](https://spotihelper.com/register)
 
@@ -12,7 +12,7 @@ spotify user in order to use SpotiHelper.
 
 SpotiHelper is running on a server created with Gunicorn and NGINX.
 
-
+# screenshots from SpotiHelper
 <img width="509" alt="image" src="https://user-images.githubusercontent.com/82653550/210442885-f3ed5467-fb04-47af-9460-b74240e55fba.png">
 <img width="511" alt="image" src="https://user-images.githubusercontent.com/82653550/210443051-ff748f9d-9546-4432-8afc-4e837b320ea8.png">
 <img width="518" alt="image" src="https://user-images.githubusercontent.com/82653550/210443157-d13cabbf-266a-4684-8505-029fc80f0061.png">
