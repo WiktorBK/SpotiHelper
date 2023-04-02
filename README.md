@@ -1,6 +1,5 @@
 # What is SpotiHelper?
 
-[www.spotihelper.com](https://spotihelper.com/register)
 
 Web app built with Spotify API and python. User creates an account and grants
 access to their official spotify account. SpotiHelper shows recently played songs,
